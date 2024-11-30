@@ -12,7 +12,7 @@ namespace EStockFlow.Endpoints
     {
         public static void Map(WebApplication app)
         {
-            var group = app.MapGroup("api/items")
+            var group = app.MapGroup("/api/items")
                 .WithTags("Items");
 
             group.MapPost("/", CreateProduct)

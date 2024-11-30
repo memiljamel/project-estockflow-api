@@ -7,6 +7,7 @@ namespace EStockFlow.Repositories
         private readonly AppDbContext _context;
 
         private IProductRepository _productRepository;
+        private ITransactionRepository _transactionRepository;
         
         public UnitOfWork(AppDbContext context)
         {
@@ -23,6 +24,19 @@ namespace EStockFlow.Repositories
                 }
 
                 return _productRepository;
+            }
+        }
+        
+        public ITransactionRepository TransactionRepository
+        {
+            get
+            {
+                if (_transactionRepository == null)
+                {
+                    _transactionRepository = new TransactionRepository(_context);
+                }
+
+                return _transactionRepository;
             }
         }
 

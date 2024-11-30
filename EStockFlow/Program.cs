@@ -41,5 +41,6 @@ app.UseStaticFiles();
 app.UseCors();
 
 ProductEndpoint.Map(app);
+TransactionEndpoint.Map(app);
 
 app.Run();

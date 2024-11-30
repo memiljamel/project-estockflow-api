@@ -1,0 +1,19 @@
+﻿### GET Transactions
+GET http://localhost:5204/api/pos/transactions
+Accept: application/json
+
+### GET Transactions With Filter
+GET http://localhost:5204/api/pos/transactions?quantity=10&page=1&size=50
+Accept: application/json
+
+### POST Transaction
+POST http://localhost:5204/api/pos/transactions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "Item": "4a0acb1d-b011-47e8-aa69-681277531cc6",
+  "Quantity": 10,
+  "Category": 1,
+  "Price": 100000.00
+}

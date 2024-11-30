@@ -15,5 +15,8 @@ namespace EStockFlow.Repositories
             int pageNumber,
             int pageSize);
 
+        bool IsProductExists(Guid id);
+
+        bool IsSufficientStock(int quantity, Guid? id);
     }
 }

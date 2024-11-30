@@ -50,5 +50,17 @@ namespace EStockFlow.Repositories
 
             return await PaginatedList<Product>.CreateAsync(query, pageNumber, pageSize);
         }
+
+        public bool IsProductExists(Guid id)
+        {
+            return _context.Products.Any(p => p.Id == id);
+        }
+
+        public bool IsSufficientStock(int quantity, Guid? id)
+        {
+            var product = _context.Products.Find(id);
+
+            return (product != null) && (product.InitialStock >= quantity);
+        }
     }
 }

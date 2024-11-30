@@ -40,7 +40,7 @@ Content-Type: image/png
 --boundary--
 
 ### PUT Product
-PUT http://localhost:5204/api/items/6e8c9406-1497-43e2-b508-332addd3ea2a
+PUT http://localhost:5204/api/items/4a0acb1d-b011-47e8-aa69-681277531cc6
 Accept: application/json
 Content-Type: multipart/form-data; boundary=boundary
 
@@ -73,5 +73,5 @@ Content-Type: image/png
 --boundary--
 
 ### DELETE Product
-DELETE http://localhost:5204/api/items/6e8c9406-1497-43e2-b508-332addd3ea2a
+DELETE http://localhost:5204/api/items/4a0acb1d-b011-47e8-aa69-681277531cc6
 Accept: application/json
