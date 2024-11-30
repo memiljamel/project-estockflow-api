@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "gDgS8gC0aaEOt628IFr7sQhbU21VP53edbSE0YbnMVE=",
+  "Source": "EStockFlow",
+  "BasePath": "_content/EStockFlow",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "EStockFlow\\wwwroot",
+      "Source": "EStockFlow",
+      "ContentRoot": "C:\\Users\\004\\RiderProjects\\TechincalTest\\EStockFlow\\EStockFlow\\wwwroot\\",
+      "BasePath": "_content/EStockFlow",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\004\\RiderProjects\\TechincalTest\\EStockFlow\\EStockFlow\\wwwroot\\photo.png",
+      "SourceId": "EStockFlow",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\004\\RiderProjects\\TechincalTest\\EStockFlow\\EStockFlow\\wwwroot\\",
+      "BasePath": "_content/EStockFlow",
+      "RelativePath": "photo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\photo.png"
+    }
+  ]
+}

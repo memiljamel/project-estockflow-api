@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EStockFlow")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3fae3189f676d2ddafe09504b098197c37f60d56")]
 [assembly: System.Reflection.AssemblyProductAttribute("EStockFlow")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EStockFlow")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

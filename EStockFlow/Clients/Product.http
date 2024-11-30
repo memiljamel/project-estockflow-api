@@ -1,0 +1,77 @@
+### GET Products
+GET http://localhost:5204/api/items
+Accept: application/json
+
+### GET Products With Filter
+GET http://localhost:5204/api/items?name=product&page=1&size=50
+Accept: application/json
+
+### POST Product
+POST http://localhost:5204/api/items
+Accept: application/json
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="Name"
+
+Product 1
+
+--boundary
+Content-Disposition: form-data; name="Price"
+
+100000.00
+
+--boundary
+Content-Disposition: form-data; name="InitialStock"
+
+10
+
+--boundary
+Content-Disposition: form-data; name="Category"
+
+1
+
+--boundary
+Content-Disposition: form-data; name="Image"; filename="photo.png"
+Content-Type: image/png
+
+< ./photo.png
+
+--boundary--
+
+### PUT Product
+PUT http://localhost:5204/api/items/6e8c9406-1497-43e2-b508-332addd3ea2a
+Accept: application/json
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="Name"
+
+Product 2
+
+--boundary
+Content-Disposition: form-data; name="Price"
+
+200000.00
+
+--boundary
+Content-Disposition: form-data; name="InitialStock"
+
+20
+
+--boundary
+Content-Disposition: form-data; name="Category"
+
+2
+
+--boundary
+Content-Disposition: form-data; name="Image"; filename="photo.png"
+Content-Type: image/png
+
+< ./photo.png
+
+--boundary--
+
+### DELETE Product
+DELETE http://localhost:5204/api/items/6e8c9406-1497-43e2-b508-332addd3ea2a
+Accept: application/json

@@ -1,6 +1,0 @@
-@EStockFlow_HostAddress = http://localhost:5204
-
-GET {{EStockFlow_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
