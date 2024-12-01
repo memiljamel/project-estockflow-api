@@ -20,11 +20,11 @@ namespace EStockFlow.Validators
                 .OverridePropertyName("price")
                 .WithName("Price");
             
-            RuleFor(x => x.InitialStock)
+            RuleFor(x => x.Stock)
                 .NotEmpty()
                 .GreaterThan(0)
-                .OverridePropertyName("initialStock")
-                .WithName("Initial Stock");
+                .OverridePropertyName("stock")
+                .WithName("Stock");
             
             RuleFor(x => x.Category)
                 .NotNull()

@@ -1,4 +1,5 @@
-﻿using EStockFlow.Enums;
+﻿using System.Text.Json.Serialization;
+using EStockFlow.Enums;
 
 namespace EStockFlow.Models
 {
@@ -6,12 +7,14 @@ namespace EStockFlow.Models
     {
         public Guid Id { get; set; }
         
-        public Guid Item { get; set; }
+        public dynamic Item { get; set; }
         
         public int Quantity { get; set; }
         
-        public ProductCategory Category { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public ProductCategoryEnum Category { get; set; }
         
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal Price { get; set; }
         
         public decimal Amount { get; set; }

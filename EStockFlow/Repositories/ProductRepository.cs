@@ -15,9 +15,8 @@ namespace EStockFlow.Repositories
         public async Task<PaginatedList<Product>> GetPagedProducts(
             string? name,
             decimal? price,
-            int? initialStock,
-            ProductCategory? category,
-            string? imageUrl,
+            int? stock,
+            ProductCategoryEnum? category,
             int pageNumber,
             int pageSize)
         {
@@ -33,20 +32,54 @@ namespace EStockFlow.Repositories
                 query = query.Where(p => p.Price >= price.Value);
             }
 
-            if (initialStock.HasValue)
+            if (stock.HasValue)
             {
-                query = query.Where(p => p.InitialStock >= initialStock.Value);
+                query = query.Where(p => p.Stock >= stock.Value);
             }
 
             if (category.HasValue)
             {
                 query = query.Where(p => p.Category == category.Value);
             }
+            
+            query = query.OrderByDescending(p => p.CreatedAt);
 
-            if (imageUrl != null)
+            return await PaginatedList<Product>.CreateAsync(query, pageNumber, pageSize);
+        }
+
+        public async Task<PaginatedList<Product>> GetPagedStocks(
+            string? name,
+            decimal? price,
+            int? stock,
+            ProductCategoryEnum? category,
+            int pageNumber,
+            int pageSize)
+        {
+            var query = _context.Products
+                .Where(p => p.Stock > 0)
+                .AsNoTracking();
+
+            if (name != null)
             {
-                query = query.Where(p => p.ImageUrl.ToLower().Contains(imageUrl.ToLower()));
+                query = query.Where(p => p.Name.ToLower().Contains(name.ToLower()));
             }
+
+            if (price.HasValue)
+            {
+                query = query.Where(p => p.Price >= price.Value);
+            }
+
+            if (stock.HasValue)
+            {
+                query = query.Where(p => p.Stock >= stock.Value);
+            }
+
+            if (category.HasValue)
+            {
+                query = query.Where(p => p.Category == category.Value);
+            }
+            
+            query = query.OrderByDescending(p => p.CreatedAt);
 
             return await PaginatedList<Product>.CreateAsync(query, pageNumber, pageSize);
         }
@@ -60,7 +93,7 @@ namespace EStockFlow.Repositories
         {
             var product = _context.Products.Find(id);
 
-            return (product != null) && (product.InitialStock >= quantity);
+            return (product != null) && (product.Stock >= quantity);
         }
     }
 }

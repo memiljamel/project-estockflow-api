@@ -42,5 +42,7 @@ app.UseCors();
 
 ProductEndpoint.Map(app);
 TransactionEndpoint.Map(app);
+ReportEndpoint.Map(app);
+StockEndpoint.Map(app);
 
 app.Run();

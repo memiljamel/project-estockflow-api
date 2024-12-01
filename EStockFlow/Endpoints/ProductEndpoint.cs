@@ -15,15 +15,52 @@ namespace EStockFlow.Endpoints
             var group = app.MapGroup("/api/items")
                 .WithTags("Items");
 
+            group.MapGet("/", GetProducts);
+
             group.MapPost("/", CreateProduct)
                 .DisableAntiforgery();
-
-            group.MapGet("/", GetProducts);
 
             group.MapPut("/{itemId:guid}", UpdateProduct)
                 .DisableAntiforgery();
 
             group.MapDelete("/{itemId:guid}", DeleteProduct);
+        }
+
+        private static async Task<Results<Ok<PaginatedList<ProductResponse>>, NotFound>> GetProducts(
+            [FromServices] IUnitOfWork unitOfWork,
+            [FromQuery] string? name,
+            [FromQuery] decimal? price,
+            [FromQuery] int? stock,
+            [FromQuery] ProductCategoryEnum? category,
+            [FromQuery(Name = "page")] int pageNumber = 1,
+            [FromQuery(Name = "size")] int pageSize = 15)
+        {
+            if (pageNumber < 1)
+            {
+                return TypedResults.NotFound();
+            }
+
+            var products = await unitOfWork.ProductRepository.GetPagedProducts(
+                name,
+                price,
+                stock,
+                category,
+                pageNumber,
+                pageSize);
+
+            if (products.PageIndex != 1 && pageNumber > products.TotalPages)
+            {
+                return TypedResults.NotFound();
+            }
+
+            var response = products.Select(p => ToProductResponse(p))
+                .ToList();
+
+            return TypedResults.Ok(new PaginatedList<ProductResponse>(
+                response,
+                products.TotalCount,
+                products.PageIndex,
+                pageSize));
         }
 
         private static async Task<Results<Created<ProductResponse>, ValidationProblem>> CreateProduct(
@@ -38,13 +75,13 @@ namespace EStockFlow.Endpoints
                 var filename = Path.GetRandomFileName() + Path.GetExtension(request.Image.FileName);
 
                 await using var stream = new FileStream(Path.Combine("wwwroot", filename), FileMode.Create);
-                await request.Image.CopyToAsync(stream); 
+                await request.Image.CopyToAsync(stream);
 
                 var product = new Product
                 {
                     Name = request.Name,
                     Price = request.Price,
-                    InitialStock = request.InitialStock,
+                    Stock = request.Stock,
                     Category = request.Category,
                     ImageUrl = filename,
                 };
@@ -58,45 +95,6 @@ namespace EStockFlow.Endpoints
             }
 
             return TypedResults.ValidationProblem(result.ToDictionary());
-        }
-
-        private static async Task<Results<Ok<PaginatedList<ProductResponse>>, NotFound>> GetProducts(
-            [FromServices] IUnitOfWork unitOfWork,
-            [FromQuery] string? name,
-            [FromQuery] decimal? price,
-            [FromQuery] int? initialStock,
-            [FromQuery] ProductCategory? category,
-            [FromQuery] string? imageUrl,
-            [FromQuery(Name = "page")] int pageNumber = 1,
-            [FromQuery(Name = "size")] int pageSize = 15)
-        {
-            if (pageNumber < 1)
-            {
-                return TypedResults.NotFound();
-            }
-
-            var products = await unitOfWork.ProductRepository.GetPagedProducts(
-                name,
-                price,
-                initialStock,
-                category,
-                imageUrl,
-                pageNumber,
-                pageSize);
-
-            if (products.PageIndex != 1 && pageNumber > products.Count)
-            {
-                return TypedResults.NotFound();
-            }
-
-            var response = products.Select(p => ToProductResponse(p))
-                .ToList();
-
-            return TypedResults.Ok(new PaginatedList<ProductResponse>(
-                response,
-                products.Count,
-                products.PageIndex,
-                pageSize));
         }
 
         private static async Task<Results<Ok<ProductResponse>, NotFound, ValidationProblem>> UpdateProduct(
@@ -119,17 +117,17 @@ namespace EStockFlow.Endpoints
 
                 product.Name = request.Name;
                 product.Price = request.Price;
-                product.InitialStock = request.InitialStock;
+                product.Stock = request.Stock;
                 product.Category = request.Category;
                 product.UpdatedAt = DateTime.UtcNow;
-                
+
                 if (request.Image != null)
                 {
                     if (product.ImageUrl != null && File.Exists(Path.Combine("wwwroot", product.ImageUrl)))
                     {
                         File.Delete(Path.Combine("wwwroot", product.ImageUrl));
                     }
-                    
+
                     var filename = Path.GetRandomFileName() + Path.GetExtension(request.Image.FileName);
 
                     await using var stream = new FileStream(Path.Combine("wwwroot", filename), FileMode.Create);
@@ -157,12 +155,12 @@ namespace EStockFlow.Endpoints
             {
                 return TypedResults.NotFound();
             }
-            
+
             if (product.ImageUrl != null && File.Exists(Path.Combine("wwwroot", product.ImageUrl)))
             {
                 File.Delete(Path.Combine("wwwroot", product.ImageUrl));
             }
-            
+
             unitOfWork.ProductRepository.Remove(product);
 
             await unitOfWork.SaveChangesAsync();
@@ -177,7 +175,7 @@ namespace EStockFlow.Endpoints
                 Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
-                InitialStock = product.InitialStock,
+                Stock = product.Stock,
                 Category = product.Category,
                 ImageUrl = product.ImageUrl,
                 CreatedAt = product.CreatedAt,

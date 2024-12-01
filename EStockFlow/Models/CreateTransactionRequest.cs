@@ -8,7 +8,7 @@ namespace EStockFlow.Models
         
         public int Quantity { get; set; }
         
-        public ProductCategory Category { get; set; }
+        public ProductCategoryEnum Category { get; set; }
         
         public decimal Price { get; set; }
     }

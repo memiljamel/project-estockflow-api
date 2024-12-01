@@ -22,7 +22,7 @@ Content-Disposition: form-data; name="Price"
 100000.00
 
 --boundary
-Content-Disposition: form-data; name="InitialStock"
+Content-Disposition: form-data; name="Stock"
 
 10
 
@@ -40,7 +40,7 @@ Content-Type: image/png
 --boundary--
 
 ### PUT Product
-PUT http://localhost:5204/api/items/4a0acb1d-b011-47e8-aa69-681277531cc6
+PUT http://localhost:5204/api/items/3c89b33b-d640-4cd4-afc3-f046995ecf98
 Accept: application/json
 Content-Type: multipart/form-data; boundary=boundary
 
@@ -55,7 +55,7 @@ Content-Disposition: form-data; name="Price"
 200000.00
 
 --boundary
-Content-Disposition: form-data; name="InitialStock"
+Content-Disposition: form-data; name="Stock"
 
 20
 
@@ -73,5 +73,5 @@ Content-Type: image/png
 --boundary--
 
 ### DELETE Product
-DELETE http://localhost:5204/api/items/4a0acb1d-b011-47e8-aa69-681277531cc6
+DELETE http://localhost:5204/api/items/3c89b33b-d640-4cd4-afc3-f046995ecf98
 Accept: application/json

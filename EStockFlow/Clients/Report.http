@@ -1,0 +1,7 @@
+### GET Products
+GET http://localhost:5204/api/pos/reports
+Accept: application/json
+
+### GET Products With Filter
+GET http://localhost:5204/api/pos/reports?name=product&page=1&size=50
+Accept: application/json

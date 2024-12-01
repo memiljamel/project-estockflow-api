@@ -8,7 +8,7 @@ namespace EStockFlow.Repositories
 
         private IProductRepository _productRepository;
         private ITransactionRepository _transactionRepository;
-        
+
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
@@ -26,7 +26,7 @@ namespace EStockFlow.Repositories
                 return _productRepository;
             }
         }
-        
+
         public ITransactionRepository TransactionRepository
         {
             get
@@ -44,7 +44,7 @@ namespace EStockFlow.Repositories
         {
             await _context.SaveChangesAsync();
         }
-        
+
         public void Dispose()
         {
             _context.Dispose();

@@ -8,9 +8,9 @@ namespace EStockFlow.Models
         
         public decimal Price { get; set; }
         
-        public int InitialStock { get; set; }
+        public int Stock { get; set; }
         
-        public ProductCategory Category { get; set; }
+        public ProductCategoryEnum Category { get; set; }
         
         public IFormFile Image { get; set; }
     }

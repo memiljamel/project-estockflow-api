@@ -15,9 +15,48 @@ namespace EStockFlow.Endpoints
             var group = app.MapGroup("/api/pos/transactions")
                 .WithTags("Transactions");
 
-            group.MapPost("/", CreateTransaction);
-
             group.MapGet("/", GetTransactions);
+
+            group.MapPost("/", CreateTransaction);
+        }
+
+        private static async Task<Results<Ok<PaginatedList<TransactionResponse>>, NotFound>> GetTransactions(
+            [FromServices] IUnitOfWork unitOfWork,
+            [FromQuery] Guid? item,
+            [FromQuery] int? quantity,
+            [FromQuery] ProductCategoryEnum? category,
+            [FromQuery] decimal? price,
+            [FromQuery] decimal? amount,
+            [FromQuery(Name = "page")] int pageNumber = 1,
+            [FromQuery(Name = "size")] int pageSize = 15)
+        {
+            if (pageNumber < 1)
+            {
+                return TypedResults.NotFound();
+            }
+
+            var transactions = await unitOfWork.TransactionRepository.GetPagedTransactions(
+                item,
+                quantity,
+                category,
+                price,
+                amount,
+                pageNumber,
+                pageSize);
+
+            if (transactions.PageIndex != 1 && pageNumber > transactions.TotalPages)
+            {
+                return TypedResults.NotFound();
+            }
+
+            var response = transactions.Select(t => ToTransactionResponse(t))
+                .ToList();
+
+            return TypedResults.Ok(new PaginatedList<TransactionResponse>(
+                response,
+                transactions.TotalCount,
+                transactions.PageIndex,
+                pageSize));
         }
 
         private static async Task<Results<Created<TransactionResponse>, ValidationProblem>> CreateTransaction(
@@ -39,7 +78,7 @@ namespace EStockFlow.Endpoints
                 };
                 unitOfWork.TransactionRepository.Add(transaction);
 
-                transaction.Product.InitialStock -= request.Quantity;
+                transaction.Product.Stock -= request.Quantity;
 
                 await unitOfWork.SaveChangesAsync();
 
@@ -49,45 +88,6 @@ namespace EStockFlow.Endpoints
             }
 
             return TypedResults.ValidationProblem(result.ToDictionary());
-        }
-
-        private static async Task<Results<Ok<PaginatedList<TransactionResponse>>, NotFound>> GetTransactions(
-            [FromServices] IUnitOfWork unitOfWork,
-            [FromQuery] Guid? item,
-            [FromQuery] int? quantity,
-            [FromQuery] ProductCategory? category,
-            [FromQuery] decimal? price,
-            [FromQuery] decimal? amount,
-            [FromQuery(Name = "page")] int pageNumber = 1,
-            [FromQuery(Name = "size")] int pageSize = 15)
-        {
-            if (pageNumber < 1)
-            {
-                return TypedResults.NotFound();
-            }
-
-            var transactions = await unitOfWork.TransactionRepository.GetPagedTransactions(
-                item,
-                quantity,
-                category,
-                price,
-                amount,
-                pageNumber,
-                pageSize);
-
-            if (transactions.PageIndex != 1 && pageNumber > transactions.Count)
-            {
-                return TypedResults.NotFound();
-            }
-
-            var response = transactions.Select(t => ToTransactionResponse(t))
-                .ToList();
-
-            return TypedResults.Ok(new PaginatedList<TransactionResponse>(
-                response,
-                transactions.Count,
-                transactions.PageIndex,
-                pageSize));
         }
 
         private static TransactionResponse ToTransactionResponse(Transaction transaction)

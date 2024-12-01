@@ -9,8 +9,18 @@ namespace EStockFlow.Repositories
         Task<PaginatedList<Transaction>> GetPagedTransactions(
             Guid? item,
             int? quantity,
-            ProductCategory? category,
+            ProductCategoryEnum? category,
             decimal? price,
+            decimal? amount,
+            int pageNumber,
+            int pageSize);
+        
+        Task<PaginatedList<Transaction>> GetPagedReports(
+            string? name,
+            decimal? price,
+            int? stock,
+            ProductCategoryEnum? category,
+            int? quantity,
             decimal? amount,
             int pageNumber,
             int pageSize);

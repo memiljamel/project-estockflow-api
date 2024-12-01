@@ -17,7 +17,7 @@ namespace EStockFlow.Entities
         
         [Required]
         [Column(Order = 3)]
-        public ProductCategory Category { get; set; }
+        public ProductCategoryEnum Category { get; set; }
         
         [Required]
         [Column(Order = 4)]

@@ -1,6 +1,6 @@
 ﻿namespace EStockFlow.Enums
 {
-    public enum ProductCategory
+    public enum ProductCategoryEnum
     {
         Food = 1,
         Drink = 2,

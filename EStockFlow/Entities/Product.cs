@@ -18,11 +18,11 @@ namespace EStockFlow.Entities
         
         [Required]
         [Column(Order = 3)]
-        public int InitialStock { get; set; }
+        public int Stock { get; set; }
         
         [Required]
         [Column(Order = 4)]
-        public ProductCategory Category { get; set; }
+        public ProductCategoryEnum Category { get; set; }
         
         [Required]
         [Column(Order = 5)]
