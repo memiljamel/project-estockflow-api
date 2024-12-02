@@ -14,7 +14,8 @@ namespace EStockFlow.Endpoints
             var group = app.MapGroup("/api/pos/reports")
                 .WithTags("Reports");
 
-            group.MapGet("/", GetReports);
+            group.MapGet("/", GetReports)
+                .RequireAuthorization();
         }
 
         private static async Task<Results<Ok<ReportResponse>, NotFound>> GetReports(

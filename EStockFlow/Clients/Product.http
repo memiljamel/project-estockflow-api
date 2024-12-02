@@ -1,13 +1,16 @@
 ### GET Products
 GET http://localhost:5204/api/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VybmFtZSAxIiwianRpIjoiYjc3NjhkMWUtYjkwNy00MTdjLWIxZWEtOWZiYjMzNDM2MDZkIiwiZXhwIjoxNzMzMDU1MDYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.S8qfnmjBFKyzh11l8JpIvSKzJzJPxUIve-W_gJ4Yeb4
 Accept: application/json
 
 ### GET Products With Filter
 GET http://localhost:5204/api/items?name=product&page=1&size=50
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VybmFtZSAxIiwianRpIjoiYjc3NjhkMWUtYjkwNy00MTdjLWIxZWEtOWZiYjMzNDM2MDZkIiwiZXhwIjoxNzMzMDU1MDYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.S8qfnmjBFKyzh11l8JpIvSKzJzJPxUIve-W_gJ4Yeb4
 Accept: application/json
 
 ### POST Product
 POST http://localhost:5204/api/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VybmFtZSAxIiwianRpIjoiYjc3NjhkMWUtYjkwNy00MTdjLWIxZWEtOWZiYjMzNDM2MDZkIiwiZXhwIjoxNzMzMDU1MDYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.S8qfnmjBFKyzh11l8JpIvSKzJzJPxUIve-W_gJ4Yeb4
 Accept: application/json
 Content-Type: multipart/form-data; boundary=boundary
 
@@ -41,6 +44,7 @@ Content-Type: image/png
 
 ### PUT Product
 PUT http://localhost:5204/api/items/3c89b33b-d640-4cd4-afc3-f046995ecf98
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VybmFtZSAxIiwianRpIjoiYjc3NjhkMWUtYjkwNy00MTdjLWIxZWEtOWZiYjMzNDM2MDZkIiwiZXhwIjoxNzMzMDU1MDYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.S8qfnmjBFKyzh11l8JpIvSKzJzJPxUIve-W_gJ4Yeb4
 Accept: application/json
 Content-Type: multipart/form-data; boundary=boundary
 
@@ -74,4 +78,5 @@ Content-Type: image/png
 
 ### DELETE Product
 DELETE http://localhost:5204/api/items/3c89b33b-d640-4cd4-afc3-f046995ecf98
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VybmFtZSAxIiwianRpIjoiYjc3NjhkMWUtYjkwNy00MTdjLWIxZWEtOWZiYjMzNDM2MDZkIiwiZXhwIjoxNzMzMDU1MDYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.S8qfnmjBFKyzh11l8JpIvSKzJzJPxUIve-W_gJ4Yeb4
 Accept: application/json

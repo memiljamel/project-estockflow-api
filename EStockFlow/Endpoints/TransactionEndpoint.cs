@@ -15,9 +15,11 @@ namespace EStockFlow.Endpoints
             var group = app.MapGroup("/api/pos/transactions")
                 .WithTags("Transactions");
 
-            group.MapGet("/", GetTransactions);
+            group.MapGet("/", GetTransactions)
+                .RequireAuthorization();
 
-            group.MapPost("/", CreateTransaction);
+            group.MapPost("/", CreateTransaction)
+                .RequireAuthorization();
         }
 
         private static async Task<Results<Ok<PaginatedList<TransactionResponse>>, NotFound>> GetTransactions(

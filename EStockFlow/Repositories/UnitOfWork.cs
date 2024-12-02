@@ -6,12 +6,26 @@ namespace EStockFlow.Repositories
     {
         private readonly AppDbContext _context;
 
+        private IUserRepository _userRepository;
         private IProductRepository _productRepository;
         private ITransactionRepository _transactionRepository;
 
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
+        }
+        
+        public IUserRepository UserRepository
+        {
+            get
+            {
+                if (_userRepository == null)
+                {
+                    _userRepository = new UserRepository(_context);
+                }
+
+                return _userRepository;
+            }
         }
 
         public IProductRepository ProductRepository

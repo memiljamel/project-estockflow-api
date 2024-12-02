@@ -1,7 +1,9 @@
 ### GET Stocks
 GET http://localhost:5204/api/items/stock
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VybmFtZSAxIiwianRpIjoiYjc3NjhkMWUtYjkwNy00MTdjLWIxZWEtOWZiYjMzNDM2MDZkIiwiZXhwIjoxNzMzMDU1MDYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.S8qfnmjBFKyzh11l8JpIvSKzJzJPxUIve-W_gJ4Yeb4
 Accept: application/json
 
 ### GET Stocks With Filter
 GET http://localhost:5204/api/items/stock?name=product&page=1&size=50
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJVc2VybmFtZSAxIiwianRpIjoiYjc3NjhkMWUtYjkwNy00MTdjLWIxZWEtOWZiYjMzNDM2MDZkIiwiZXhwIjoxNzMzMDU1MDYxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.S8qfnmjBFKyzh11l8JpIvSKzJzJPxUIve-W_gJ4Yeb4
 Accept: application/json

@@ -15,15 +15,19 @@ namespace EStockFlow.Endpoints
             var group = app.MapGroup("/api/items")
                 .WithTags("Items");
 
-            group.MapGet("/", GetProducts);
+            group.MapGet("/", GetProducts)
+                .RequireAuthorization();
 
             group.MapPost("/", CreateProduct)
-                .DisableAntiforgery();
+                .DisableAntiforgery()
+                .RequireAuthorization();
 
             group.MapPut("/{itemId:guid}", UpdateProduct)
-                .DisableAntiforgery();
+                .DisableAntiforgery()
+                .RequireAuthorization();
 
-            group.MapDelete("/{itemId:guid}", DeleteProduct);
+            group.MapDelete("/{itemId:guid}", DeleteProduct)
+                .RequireAuthorization();
         }
 
         private static async Task<Results<Ok<PaginatedList<ProductResponse>>, NotFound>> GetProducts(

@@ -1,5 +1,4 @@
-﻿using EStockFlow.Entities;
-using EStockFlow.Models;
+﻿using EStockFlow.Models;
 using FluentValidation;
 
 namespace EStockFlow.Validators
