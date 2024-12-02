@@ -70,7 +70,7 @@ namespace EStockFlow.Endpoints
         private static async Task<Results<Created<ProductResponse>, ValidationProblem>> CreateProduct(
             [FromServices] IValidator<CreateProductRequest> validator,
             [FromServices] IUnitOfWork unitOfWork,
-            [FromForm] CreateProductRequest request)
+            [AsParameters] CreateProductRequest request)
         {
             var result = await validator.ValidateAsync(request);
 
@@ -104,16 +104,13 @@ namespace EStockFlow.Endpoints
         private static async Task<Results<Ok<ProductResponse>, NotFound, ValidationProblem>> UpdateProduct(
             [FromServices] IValidator<UpdateProductRequest> validator,
             [FromServices] IUnitOfWork unitOfWork,
-            [FromRoute] Guid itemId,
-            [FromForm] UpdateProductRequest request)
+            [AsParameters] UpdateProductRequest request)
         {
-            request.Id = itemId;
-
             var result = await validator.ValidateAsync(request);
 
             if (result.IsValid)
             {
-                var product = await unitOfWork.ProductRepository.GetById(itemId);
+                var product = await unitOfWork.ProductRepository.GetById(request.Id);
                 if (product == null)
                 {
                     return TypedResults.NotFound();
